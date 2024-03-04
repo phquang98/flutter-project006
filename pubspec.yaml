@@ -7,6 +7,10 @@ environment:
   sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  bloc_concurrency: ^0.2.0
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
 
