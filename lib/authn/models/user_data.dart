@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
+// all fields final -> immutable by definition
 final class UserData extends Equatable {
   final int userId;
   final String username;

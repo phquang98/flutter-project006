@@ -1,24 +1,23 @@
 part of 'authn_bloc.dart';
 
-// if simple, extends Equatable -> use fields to reflect state's changes https://bloclibrary.dev/tutorials/flutter-infinite-list/
-// if complex, sealed class -> final class https://github.com/felangel/bloc/blob/master/examples/flutter_shopping_cart/lib/cart/bloc/cart_state.dart
-// this example uses simple case
-
 // use a field for discrimination (e.g. TS discriminated unions)
 enum LoginStatus { initial, success, failure }
 
+/// Create a SubjectState
+/// - if simple, extends Equatable -> use fields to reflect state's changes <https://bloclibrary.dev/tutorials/flutter-infinite-list/>
+/// - if complex, sealed class -> final class <https://github.com/felangel/bloc/blob/master/examples/flutter_shopping_cart/lib/cart/bloc/cart_state.dart>
 final class AuthnState extends Equatable {
-  final LoginStatus loginStatus;
-  final UserData userData;
-  final String errMsg;
-
-  // named params
+  // named params constructor
   const AuthnState({
     this.loginStatus = LoginStatus.initial,
     this.userData =
         const UserData(userId: 0, username: 'guest', userPwd: 'guest'),
     this.errMsg = "",
   });
+
+  final LoginStatus loginStatus;
+  final UserData userData;
+  final String errMsg;
 
   // based on copyWith https://bloclibrary.dev/tutorials/flutter-infinite-list/
   AuthnState mutate({
