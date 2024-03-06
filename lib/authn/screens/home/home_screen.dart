@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_project006/authn/bloc/authn_bloc.dart';
+
+import 'package:flutter_project006/authn/index.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

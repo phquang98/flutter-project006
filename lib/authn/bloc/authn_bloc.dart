@@ -15,10 +15,14 @@ part 'authn_state.dart';
 class AuthnBloc extends Bloc<AuthnEvent, AuthnState> {
   AuthnBloc({required this.simpleRepo}) : super(const AuthnState()) {
     on<LoginRequested>(_onLoginRequested);
+    on<AnotherLoginRequest>(_onAnotherLoginRequested);
   }
 
   final SimpleRepo simpleRepo;
 
+  // --- Handlers ---
+
+  // remember, we trigger events using SubjectEventType (no underscore) and Bloc use DI to map to handlers (have underscore)
   Future<void> _onLoginRequested(
     AuthnEvent evt,
     Emitter<AuthnState> emit,
@@ -42,6 +46,35 @@ class AuthnBloc extends Bloc<AuthnEvent, AuthnState> {
         state.mutate(
           loginStatusHere: LoginStatus.failure,
           errMsgHere: 'Failed to fake fetched user data!',
+        ),
+      );
+    }
+  }
+
+  // remember, we trigger events using SubjectEventType (no underscore) and Bloc use DI to map to handlers (have underscore)
+  Future<void> _onAnotherLoginRequested(
+    AuthnEvent evt,
+    Emitter<AuthnState> emit,
+  ) async {
+    try {
+      if (state.loginStatus == LoginStatus.initial) {
+        final fetchedData = await simpleRepo.login();
+        log("Empty state 2. Populating...");
+        emit(
+          state.mutate(
+            loginStatusHere: LoginStatus.success,
+            userDataHere: fetchedData,
+            errMsgHere: '',
+          ),
+        );
+      } else if (state.loginStatus == LoginStatus.success) {
+        log("State 2 has values. Returning...");
+      }
+    } catch (err) {
+      emit(
+        state.mutate(
+          loginStatusHere: LoginStatus.failure,
+          errMsgHere: 'Failed to fake fetched user data 2!',
         ),
       );
     }

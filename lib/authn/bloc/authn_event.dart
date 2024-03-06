@@ -7,3 +7,6 @@ sealed class AuthnEvent extends Equatable {
 }
 
 final class LoginRequested extends AuthnEvent {}
+
+// illustrate of firing another evt
+final class AnotherLoginRequest extends AuthnEvent {}
