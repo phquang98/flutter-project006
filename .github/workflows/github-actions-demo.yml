@@ -38,7 +38,8 @@ jobs:
         run: flutter pub get
       - name: Analyze
         working-directory: .
-        run: flutter analyze --no-fatal-warnings lib # allow warnings
+        # run: flutter analyze --no-fatal-warnings lib # allow warnings
+        run: flutter analyze lib # allow warnings
 
 # name: GitHub Actions Demo
 # run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
