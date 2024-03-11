@@ -1,5 +1,5 @@
 # use this name to appear on Github Actions tabs
-name: Flutter CI Workflow
+name: Another Flutter CI Workflow
 # omit this to use commit message value
 # run-name: 
 
@@ -38,7 +38,7 @@ jobs:
         run: flutter pub get
       - name: Analyze
         working-directory: .
-        run: flutter analyze --no-fatal-warnings lib
+        run: flutter analyze lib
 
 # name: GitHub Actions Demo
 # run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
