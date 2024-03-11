@@ -14,21 +14,31 @@ on:
       - $default-branch
 
 jobs:
-  format_checker:
+  format:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show the starting location inside runner (starting location is the root view of the project structure)
+      - name: Show the starting location inside runner (starting location is the root view of the project structure) (empty cause not clone and checkout yet)
         run: ls -hal
-
-      - name: Prepare code envi in the runner
+      - name: Prepare dev envi in the runner - 1/2
         uses: actions/checkout@v4
-
-      - name: Prepare dev envi in the runner
+      - name: Prepare dev envi in the runner - 2/2
         uses: subosito/flutter-action@v2
-
       - name: Check if code is formatted
         run: dart format -o none --set-exit-if-changed lib
+  
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+      - name: Dependencies
+        working-directory: .
+        run: flutter pub get
+      - name: Analyze
+        working-directory: .
+        run: flutter analyze lib
 
 # name: GitHub Actions Demo
 # run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
