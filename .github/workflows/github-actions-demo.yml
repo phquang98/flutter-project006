@@ -11,7 +11,7 @@ on:
       - feat/*
   pull_request:
     branches:
-      - $default-branch
+      - develop
 
 jobs:
   format:
