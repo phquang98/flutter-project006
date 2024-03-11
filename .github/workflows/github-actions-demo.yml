@@ -1,0 +1,60 @@
+# use this name to appear on Github Actions tabs
+name: Flutter CI Workflow
+# omit this to use commit message value
+# run-name: 
+
+# define events that will trigger this workflow
+# just use indentations, easier to write complex conditions
+on:
+  push:
+    branches:
+      - feat/*
+  pull_request:
+    branches:
+      - $default-branch
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show the starting location inside runner (starting location is the root view of the project structure) (empty cause not clone and checkout yet)
+        run: ls -hal
+      - name: Prepare dev envi in the runner - 1/2
+        uses: actions/checkout@v4
+      - name: Prepare dev envi in the runner - 2/2
+        uses: subosito/flutter-action@v2
+      - name: Check if code is formatted
+        run: dart format -o none --set-exit-if-changed lib
+  
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+      - name: Dependencies
+        working-directory: .
+        run: flutter pub get
+      - name: Analyze
+        working-directory: .
+        run: flutter analyze --no-fatal-warnings lib # allow warnings
+
+# name: GitHub Actions Demo
+# run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+# on: [push]
+# jobs:
+#   Explore-GitHub-Actions:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+#       - name: Check out repository code
+#         uses: actions/checkout@v4
+#       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+#       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+#       - name: List files in the repository
+#         run: |
+#           ls ${{ github.workspace }}
+#       - run: echo "🍏 This job's status is ${{ job.status }}."
