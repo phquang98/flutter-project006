@@ -32,6 +32,8 @@ class ExampleBlocApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+
+        
           debugShowCheckedModeBanner: false,
           title: 'Flutter Bloc Project Example',
           initialRoute: '/login',
