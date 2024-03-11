@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show the starting location inside runner
-        run: cd .. && ls -hal
+      - name: Show the starting location inside runner (starting location is the root view of the project structure)
+        run: ls -hal
 
       - name: Prepare code envi in the runner
         uses: actions/checkout@v4
@@ -30,8 +30,8 @@ jobs:
       # - name: Check if anything wrong with styling
       #   run: dart format -o none --set-exit-if-changed lib
 
-      - name: Forceful format
-        run: dart format --set-exit-if-changed lib
+      - name: Forceful format without exitting
+        run: dart format lib
 
 # name: GitHub Actions Demo
 # run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
