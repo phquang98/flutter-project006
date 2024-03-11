@@ -1,5 +1,5 @@
 # use this name to appear on Github Actions tabs
-name: Another Flutter CI Workflow
+name: Flutter CI
 # omit this to use commit message value
 # run-name: 
 
@@ -14,7 +14,7 @@ on:
       - $default-branch
 
 jobs:
-  format_checker:
+  custom_ten_job_format:
     runs-on: ubuntu-latest
 
     steps:
