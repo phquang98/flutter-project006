@@ -19,13 +19,10 @@ jobs:
 
     steps:
       - name: Show the starting location inside runner
-        run: cd .. && ls -hal
+        run: ls -hal
 
-      - name: Prepare code envi in the runner
+      - name: Runs checkout scripts by Github ???
         uses: actions/checkout@v4
-
-      - name: Prepare dev envi in the runner
-        uses: subosito/flutter-action@v2
 
       - name: Check if anything wrong with styling
         run: dart format -o none --set-exit-if-changed lib
