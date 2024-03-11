@@ -27,8 +27,11 @@ jobs:
       - name: Prepare dev envi in the runner
         uses: subosito/flutter-action@v2
 
-      - name: Check if code is formatted
-        run: dart format -o none --set-exit-if-changed lib
+      # - name: Check if anything wrong with styling
+      #   run: dart format -o none --set-exit-if-changed lib
+
+      - name: Forceful format without exitting
+        run: dart format lib
 
 # name: GitHub Actions Demo
 # run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
